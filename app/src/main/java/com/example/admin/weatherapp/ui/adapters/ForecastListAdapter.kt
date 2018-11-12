@@ -5,14 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import com.example.admin.weatherapp.R
 import com.example.admin.weatherapp.domain.model.Forecast
 import com.example.admin.weatherapp.domain.model.ForecastList
 import com.example.admin.weatherapp.ui.utils.ctx
 import com.squareup.picasso.Picasso
-import org.jetbrains.anko.find
+import kotlinx.android.synthetic.main.item_forecast.view.*
 
 /**
  * Created by admin on 10/25/2018.
@@ -42,22 +40,18 @@ class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: (Foreca
 
     class ViewHolder(view: View, val itemClick: (Forecast) -> Unit) :
             RecyclerView.ViewHolder(view) {
-        private val iconView = view.find<ImageView>(R.id.icon)
-        private val dateView = view.find<TextView>(R.id.date)
-        private val descriptionView = view.find<TextView>(R.id.description)
-        private val maxTempView = view.find<TextView>(R.id.maxTemperature)
-        private val minTempView = view.find<TextView>(R.id.minTemperature)
+
 
         fun bindForecast(forecast: Forecast) {
             with(forecast) {
-                Picasso.get().load(iconUrl).into(iconView)
-                dateView.text = date
-                descriptionView.text = description
-                maxTempView.text = "$high"
-                minTempView.text = "$low"
+                Picasso.get().load(iconUrl).into(itemView.icon)
+                itemView.date.text = date
+               itemView. description.text = description
+                itemView.maxTemperature.text = "$high"
+                itemView.minTemperature.text = "$low"
 
-                // if the last argument in a function is a function then it can be moved out of the parantheses
-                // if the function is the only argument then the parantheses can be removed
+                // if the last argument in a function is a function then it can be moved out of the parentheses
+                // if the function is the only argument then the parentheses can be removed
                 itemView.setOnClickListener { itemClick(this) }
             }
         }
