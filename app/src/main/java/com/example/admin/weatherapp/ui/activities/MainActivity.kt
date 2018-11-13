@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
                    // if there's only one argument then the left side of the arrow can be removed
                    // and the 'it' specifier provided by kotlin is used.
-                   toast(it.date)
+                   toast(it.date.toString())
                }
             }
         }
