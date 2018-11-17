@@ -1,5 +1,6 @@
 package com.example.admin.weatherapp.data
 
+import com.example.admin.weatherapp.data.server.ForecastResult
 import com.google.gson.Gson
 
 /**

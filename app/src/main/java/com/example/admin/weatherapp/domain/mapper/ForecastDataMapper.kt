@@ -1,7 +1,7 @@
 package com.example.admin.weatherapp.domain.mapper
 
-import com.example.admin.weatherapp.data.Forecast
-import com.example.admin.weatherapp.data.ForecastResult
+import com.example.admin.weatherapp.data.server.Forecast
+import com.example.admin.weatherapp.data.server.ForecastResult
 import com.example.admin.weatherapp.domain.model.ForecastList
 import java.text.DateFormat
 import java.util.*

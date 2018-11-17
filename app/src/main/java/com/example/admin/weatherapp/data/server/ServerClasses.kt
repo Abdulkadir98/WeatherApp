@@ -1,4 +1,4 @@
-package com.example.admin.weatherapp.data
+package com.example.admin.weatherapp.data.server
 
 /**
  * Created by admin on 10/30/2018.
