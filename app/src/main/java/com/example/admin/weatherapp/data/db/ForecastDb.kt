@@ -1,11 +1,9 @@
 package com.example.admin.weatherapp.data.db
 
 import com.example.admin.weatherapp.domain.datasource.ForecastDataSource
+import com.example.admin.weatherapp.domain.model.Forecast
 import com.example.admin.weatherapp.domain.model.ForecastList
-import com.example.admin.weatherapp.ui.utils.clear
-import com.example.admin.weatherapp.ui.utils.parseList
-import com.example.admin.weatherapp.ui.utils.parseOpt
-import com.example.admin.weatherapp.ui.utils.toVarargArray
+import com.example.admin.weatherapp.ui.utils.*
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 
@@ -14,6 +12,14 @@ import org.jetbrains.anko.db.select
  */
 class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.instance,
                  val dataMapper: DbDataMapper = DbDataMapper()) : ForecastDataSource {
+    override fun requestDayForecast(id: Long): Forecast?  = forecastDbHelper.use {
+        val forecast = select(DayForecastTable.NAME).byId(id)
+                .parseOpt { DayForecast(HashMap(it)) }
+
+        if (forecast != null) dataMapper.convertDayToDomain(forecast) else null
+
+    }
+
     override fun requestForecastByZipCode(zipCode: Long, date: Long): ForecastList?  = forecastDbHelper.use {
 
         val dailyRequest = "${DayForecastTable.CITY_ID} = ? AND ${DayForecastTable.DATE} >= ?"

@@ -9,6 +9,7 @@ import com.example.admin.weatherapp.R
 import com.example.admin.weatherapp.domain.model.Forecast
 import com.example.admin.weatherapp.domain.model.ForecastList
 import com.example.admin.weatherapp.ui.utils.ctx
+import com.example.admin.weatherapp.ui.utils.toDateString
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_forecast.view.*
 
@@ -19,7 +20,8 @@ import kotlinx.android.synthetic.main.item_forecast.view.*
 // They can be passed as values to other fns, can returned from functions and stored in a variable
 //left side of the arrow is the input parameter and the right side is the return type of the function
 //it is synonymous to function declaration
-class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: (Forecast) -> Unit) : RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
+class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: (Forecast) -> Unit) :
+        RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
     private val TAG: String = ForecastListAdapter::class.java.simpleName
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
@@ -45,8 +47,8 @@ class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: (Foreca
         fun bindForecast(forecast: Forecast) {
             with(forecast) {
                 Picasso.get().load(iconUrl).into(itemView.icon)
-                itemView.date.text = date.toString()
-               itemView. description.text = description
+                itemView.date.text = date.toDateString()
+                itemView. description.text = description
                 itemView.maxTemperature.text = "$high"
                 itemView.minTemperature.text = "$low"
 
